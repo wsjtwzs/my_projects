@@ -10,14 +10,4 @@
 
 @implementation MOSHNotificationModel
 
-- (NSDictionary *)userInfo
-{
-    return @{};
-}
-
-- (NSString *)getAlertBody
-{
-    return @"";
-}
-
 @end

@@ -12,22 +12,30 @@
 #import <Foundation/Foundation.h>
 #import "MOSHNotificationModel.h"
 
+typedef enum {
+    AddNotificationResult_success,
+    AddNotificationResult_fail_moreThanLimit,
+    AddNotificationResult_fail_earlierThanCurrentTime,
+    AddNotificationResult_fail,
+
+} AddNotificationResult;
+
 @interface MOSHLocalNotification : NSObject
 
 /*
  注册消息，如果有相同提醒则不添加，判断依据noti.userInfo是否相同
  */
-+ (void)addNotification:(MOSHNotificationModel *)noti;
++ (AddNotificationResult)addNotification:(UILocalNotification *)noti;
 
 /*
  删除提醒 判断依据noti.userInfo是否相同
  */
-+ (void) deleteNotification:(MOSHNotificationModel *)noti;
++ (void) deleteNotification:(UILocalNotification *)noti;
 
 /*
   判断某个通知提醒是否存在
  */
-+ (UILocalNotification*)notificationIsExited:(MOSHNotificationModel *)noti;
++ (UILocalNotification*)notificationIsExited:(UILocalNotification *)noti;
 
 /*
  删除全部提醒

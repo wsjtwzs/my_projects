@@ -17,17 +17,17 @@ typedef enum {
 @interface TaskNotificationModel : MOSHNotificationModel
 
 @property (nonatomic, strong) NSString      *title;
-@property (nonatomic, strong) NSString      *alertBody;
-@property (nonatomic, strong) NSString      *tid;
-@property (nonatomic, assign) NSInteger     successNumber;
-@property (nonatomic, assign) NSInteger     totalNumber;
-@property (nonatomic, strong) NSMutableArray *taskStateArray;//完成情况
+@property (nonatomic, strong) NSMutableArray  *notiDetailArray;//{"fireDate":"","repeatInterval":""}
 
+//@property (nonatomic, strong) NSString      *tid;
+//@property (nonatomic, assign) NSInteger     successNumber;
+//@property (nonatomic, assign) NSInteger     totalNumber;
+//@property (nonatomic, strong) NSMutableArray *taskStateArray;//完成情况
 
 - (id) initWithDictionary:(NSDictionary *)dic;
 /*
  改变task中某日期的完成状态
  */
-- (BOOL) changeTaskStateAtIndex:(NSInteger)index withState:(TaskState)state;
+//- (BOOL) changeTaskStateAtIndex:(NSInteger)index withState:(TaskState)state;
 
 @end

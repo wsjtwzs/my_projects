@@ -35,6 +35,7 @@
 		66099F3318C42CB8000F95C8 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66099F3118C42CB8000F95C8 /* TaskViewController.m */; };
 		66099F3418C42CB8000F95C8 /* TaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66099F3218C42CB8000F95C8 /* TaskViewController.xib */; };
 		66099F3718C45D73000F95C8 /* TaskNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66099F3618C45D73000F95C8 /* TaskNotificationModel.m */; };
+		66331A8718C5CA16006DFAB6 /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66331A8618C5CA16006DFAB6 /* WSDatePickerView.m */; };
 		665EF30D18BC708800620412 /* header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 665EF30B18BC708800620412 /* header@2x.png */; };
 		665EF30E18BC708800620412 /* nav_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 665EF30C18BC708800620412 /* nav_bg@2x.png */; };
 		665EF31018BC70B500620412 /* common_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 665EF30F18BC70B500620412 /* common_bg@2x.png */; };
@@ -111,6 +112,8 @@
 		66099F3218C42CB8000F95C8 /* TaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewController.xib; sourceTree = "<group>"; };
 		66099F3518C45D73000F95C8 /* TaskNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskNotificationModel.h; sourceTree = "<group>"; };
 		66099F3618C45D73000F95C8 /* TaskNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskNotificationModel.m; sourceTree = "<group>"; };
+		66331A8518C5CA16006DFAB6 /* WSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDatePickerView.h; sourceTree = "<group>"; };
+		66331A8618C5CA16006DFAB6 /* WSDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDatePickerView.m; sourceTree = "<group>"; };
 		665EF30B18BC708800620412 /* header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header@2x.png"; sourceTree = "<group>"; };
 		665EF30C18BC708800620412 /* nav_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bg@2x.png"; sourceTree = "<group>"; };
 		665EF30F18BC70B500620412 /* common_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_bg@2x.png"; sourceTree = "<group>"; };
@@ -262,6 +265,7 @@
 		101CD64118B8CACD001E8A4F /* commomClass */ = {
 			isa = PBXGroup;
 			children = (
+				66331A8418C5CA02006DFAB6 /* datePicker */,
 				665EF32618BC74CE00620412 /* baseController */,
 				665EF32518BC742500620412 /* baseView */,
 				665EF32418BC73DD00620412 /* define */,
@@ -288,6 +292,15 @@
 				66099F3618C45D73000F95C8 /* TaskNotificationModel.m */,
 			);
 			path = taskView;
+			sourceTree = "<group>";
+		};
+		66331A8418C5CA02006DFAB6 /* datePicker */ = {
+			isa = PBXGroup;
+			children = (
+				66331A8518C5CA16006DFAB6 /* WSDatePickerView.h */,
+				66331A8618C5CA16006DFAB6 /* WSDatePickerView.m */,
+			);
+			name = datePicker;
 			sourceTree = "<group>";
 		};
 		665EF30A18BC707D00620412 /* imageRource */ = {
@@ -501,6 +514,7 @@
 				101CD64918B8CD3B001E8A4F /* WSImageView.m in Sources */,
 				665EF31718BC729300620412 /* MOSHLocalNotification.m in Sources */,
 				101CD61818B8C8E4001E8A4F /* main.m in Sources */,
+				66331A8718C5CA16006DFAB6 /* WSDatePickerView.m in Sources */,
 				101CD66218B8DC4B001E8A4F /* BaseModel.m in Sources */,
 				101CD64418B8CAD5001E8A4F /* GlobalConfig.m in Sources */,
 				101CD66518B8DCAB001E8A4F /* TaskVIewModel.m in Sources */,

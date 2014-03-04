@@ -10,17 +10,17 @@
 
 @implementation TaskNotificationModel
 
-- (BOOL) changeTaskStateAtIndex:(NSInteger)index withState:(TaskState)state
-{
-    if (index >= 0 && index < self.taskStateArray.count) {
-        
-        [self.taskStateArray replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:state]];
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
+//- (BOOL) changeTaskStateAtIndex:(NSInteger)index withState:(TaskState)state
+//{
+//    if (index >= 0 && index < self.taskStateArray.count) {
+//        
+//        [self.taskStateArray replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:state]];
+//        return YES;
+//    }
+//    else {
+//        return NO;
+//    }
+//}
 
 //+ (TaskModel *) taskModelWithDictionary:(NSDictionary *)dic
 //{
@@ -41,18 +41,10 @@
  *用户信息 作为判断不同提醒的依据
  *子类重写
  */
-- (NSDictionary *)userInfo
+- (NSDictionary *)getUserInfo
 {
-    return @{@"title":self.title,@"alert":self.alertBody,@"tid":self.tid};
+    return @{@"title":self.title,@"alert":self.alertBody,@"firedate":self.fireDate};
 }
 
-/*
- *提示语
- *子类重写
- */
-- (NSString *)getAlertBody
-{
-    return self.alertBody;
-}
 
 @end

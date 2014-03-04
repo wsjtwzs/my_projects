@@ -8,13 +8,15 @@
 
 #import "BaseTableViewController.h"
 #import "TaskNotificationModel.h"
+#import "WSDatePickerView.h"
 
-@interface TaskViewController : BaseTableViewController<UITextFieldDelegate,UITextViewDelegate>
+@interface TaskViewController : BaseTableViewController<UITextFieldDelegate,UITextViewDelegate,WSDatePickerViewDelegate>
 
 @property (nonatomic, strong) TaskNotificationModel *taskNoti;
-@property (strong, nonatomic) IBOutlet UIView *infoHeaderView;
-@property (weak, nonatomic) IBOutlet WSTextField *titleTextField;
-@property (weak, nonatomic) IBOutlet WSTextView *alertTextView;
+@property (strong, nonatomic) IBOutlet UIView       *infoHeaderView;
+@property (weak, nonatomic) IBOutlet WSTextField    *titleTextField;
+@property (weak, nonatomic) IBOutlet WSTextView     *alertTextView;
+@property (nonatomic, strong) WSDatePickerView      *pickerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil taskNotificationModel:(TaskNotificationModel *)model;
 

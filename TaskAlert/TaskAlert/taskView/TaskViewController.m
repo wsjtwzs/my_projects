@@ -9,12 +9,16 @@
 #import "TaskViewController.h"
 #import "TaskNotificationModel.h"
 #import "MOSHLocalNotification.h"
+#import "MOSHNotificationModel.h"
 
 #define HOURTIMEINTERVAL 60*60
 #define DAYTIMEINTERVAL 24*HOURTIMEINTERVAL
 #define WEEKTIMEINTERVAL 7*DAYTIMEINTERVAL
 
 static NSString *alertBody = @"请输入提醒信息";
+static NSString *headerStr = @"时间计划";
+
+static CGFloat pickerViewHeight = 246.0f;
 
 @interface TaskViewController ()
 
@@ -34,7 +38,7 @@ static NSString *alertBody = @"请输入提醒信息";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_TASK];
     
     self.titleTextField.text = self.taskNoti.title;
@@ -45,6 +49,7 @@ static NSString *alertBody = @"请输入提醒信息";
         self.alertTextView.text = alertBody;
     }
     [self initWithTableView];
+    [self initWithPickerView];
     
 }
 
@@ -60,9 +65,15 @@ static NSString *alertBody = @"请输入提醒信息";
     self.baseTableView.tableHeaderView = self.infoHeaderView;
 }
 
+- (void) initWithPickerView
+{
+    self.pickerView = [[WSDatePickerView alloc] initWithFrame:CGRectMake(POINT_X, SCREENHEIGHT, SCREENWIDTH, pickerViewHeight)];
+    self.pickerView.delegate = self;
+    [self.view addSubview:self.pickerView];
+}
 - (void) addNewDate
 {
-    
+    [self.pickerView showPickerViewWithDate:nil animated:NO];
 }
 
 //日期
@@ -77,7 +88,7 @@ static NSString *alertBody = @"请输入提醒信息";
     NSDateComponents *com = [[NSDateComponents alloc] init];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
-     NSDate *currentDate = [NSDate date];
+    NSDate *currentDate = [NSDate date];
     
     switch (noti.repeatInterval) {
         case NSCalendarUnitHour:
@@ -116,7 +127,7 @@ static NSString *alertBody = @"请输入提醒信息";
     [view addSubview:add];
     
     
-     UILabel *label = [GlobalConfig createLabelWithFrame:CGRectMake(add.frame.origin.x + add.frame.size.width, 0, SCREENWIDTH - 10 -(add.frame.origin.x + add.frame.size.width) ,view.frame.size.height) Text:@"详情" FontSize:14 textColor:BLACKCOLOR];
+    UILabel *label = [GlobalConfig createLabelWithFrame:CGRectMake(add.frame.origin.x + add.frame.size.width, 0, SCREENWIDTH - 10 -(add.frame.origin.x + add.frame.size.width) ,view.frame.size.height) Text:headerStr FontSize:14 textColor:BLACKCOLOR];
     label.textAlignment = NSTextAlignmentRight;
     [view addSubview:label];
     
@@ -128,7 +139,7 @@ static NSString *alertBody = @"请输入提醒信息";
     UILocalNotification *noti = [MOSHLocalNotification notificationIsExited:self.taskNoti];
     if (noti) {
         if (noti.repeatInterval != 0) {
-           return [self everyDateWithNotification:noti].count;
+            return [self everyDateWithNotification:noti].count;
         }
         else {
             return 1;
@@ -172,7 +183,7 @@ static NSString *alertBody = @"请输入提醒信息";
         self.taskNoti.alertBody = textView.text;
     }
     else {
-            textView.text = alertBody;
+        textView.text = alertBody;
     }
 }
 
@@ -189,4 +200,49 @@ static NSString *alertBody = @"请输入提醒信息";
     }
     return YES;
 }
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - pickerViewDelegate -
+- (void) selectDate:(NSDate *)date startDate:(NSDate *)startDate
+{
+    if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:self.titleTextField.text Alert:@"亲，您还没有填写任务名哦"]) {
+        
+        //找到原消息
+        NSString *alertBody = self.titleTextField.text;
+        if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:self.alertTextView.text]) {
+            alertBody = self.alertTextView.text;
+        }
+        
+        TaskNotificationModel *noti = [[TaskNotificationModel  alloc] init];
+        noti.fireDate = startDate;
+        noti.alertBody = alertBody;
+        noti.title = self.titleTextField.text;
+        
+        UILocalNotification *localNoti = [MOSHLocalNotification notificationIsExited:noti];
+        
+        
+        if (localNoti) {
+            
+            noti.fireDate = date;
+            noti.repeatInterval = localNoti.repeatInterval;
+            
+            [MOSHLocalNotification deleteNotification:localNoti];
+            [MOSHLocalNotification addNotification:noti];
+            
+        }
+        else {
+            noti.fireDate = date;
+            [MOSHLocalNotification addNotification:noti];
+        }
+    }
+}
+
+//- (NSInteger) selectData
 @end
